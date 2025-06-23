@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.Film.NameMedia}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        video {
+            width: 100%;
+            border-radius: 5px;
+            background: #000; /* Черный фон для лучшего восприятия */
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 16px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>{{.Film.NameMedia}}</h1>
+
+    <!-- Исправленный видео-тег с важными атрибутами -->
+    <video controls autoplay muted playsinline>
+        <source src="/film/{{.Film.ID}}/stream" type="{{.Film.TypeFile}}">
+        Ваш браузер не поддерживает HTML5 видео.
+    </video>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="/" class="back-button">← Вернуться к списку</a>
+    </div>
+</div>
+
+<script>
+    // Дополнительный скрипт для обработки ошибок видео
+    document.querySelector('video').addEventListener('error', function(e) {
+        console.error('Ошибка видео:', e.target.error);
+        alert('Ошибка загрузки видео. Код: ' + e.target.error.code);
+    });
+</script>
+</body>
+</html>
